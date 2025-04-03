@@ -14,11 +14,13 @@ public class UserRegistrationTest {
 
     @Test
     public void registerUser1() {
-        Assertions.assertEquals(true, userRegistration.registerUser("manangupta", "manangupta@gmail.com", "S#123123g"));
+        Assertions.assertEquals("User registered successfully.", userRegistration.registerUser("manangupta", "manangupta@gmail.com", "S#123123g"));
+        System.out.println("User registered successfully");
     }
 
     @Test
     public void registerUser2() {
-        Assertions.assertEquals(false, userRegistration.registerUser("manangupta", "mananguptagmail.com", "S#123123g"));
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> userRegistration.registerUser("manangupta", "mananguptagmail.com", "S#123123g"));
+        System.out.println("Illegal Argument Exception caught:- Invalid parameters. ");
     }
 }

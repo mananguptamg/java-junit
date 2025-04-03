@@ -4,27 +4,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserRegistration {
-    public boolean registerUser(String username, String email, String password){
-        if(isValidUsername(username) && isValidEmail(email) &&isValidPassword(password)){
-                System.out.println("User registered successfully.");
-                return true;
-        }
-        else{
-            throw new IllegalArgumentException("Invalid input.");
+    public String registerUser(String username, String email, String password){
+        try {
+            if(isValidUsername(username) && isValidEmail(email) &&isValidPassword(password)){
+                return "User registered successfully.";
+            }
+            else{
+                throw new IllegalArgumentException("Invalid parameters");
+            }
+        }catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Error " + e.getMessage());
         }
     }
+
     public boolean isValidUsername(String username){
         String regex = "[A-Za-z0-9_-]";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(username);
 
-        if(matcher.find()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return matcher.find();
     }
 
     public boolean isValidEmail(String email){
@@ -33,12 +32,7 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
 
-        if(matcher.find()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return matcher.find();
     }
 
     public boolean isValidPassword(String password){
@@ -47,11 +41,6 @@ public class UserRegistration {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
 
-        if(matcher.find()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return matcher.find();
     }
 }
